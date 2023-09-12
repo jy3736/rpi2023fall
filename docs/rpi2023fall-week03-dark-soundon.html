@@ -700,7 +700,36 @@ def main():
     print(f&quot;Operating System: {os_info}&quot;)
 
 if __name__ == &quot;__main__&quot;:
-    main()</code></pre><ul id="eaecf359-b43a-45d2-ba05-f97c49c88ef6" class="bulleted-list"><li style="list-style-type:disc">After creating the Python script &quot;<a href="http://ex01.py/">ex01.py</a>&quot; in VSCode, change its permissions using the &quot;chmod +x&quot; command, and then run the script in a GitHub Codespace, which operates in a Linux environment.</li></ul><figure id="8d8bd103-f39b-4029-9e60-03f770a58e39" class="image"><a href="Python%20Fundamentals%20(1%206)%20debfa8bd9bb04983950adfc9d6dcf8ad/Untitled%201.png"><img style="width:950px" src="Python%20Fundamentals%20(1%206)%20debfa8bd9bb04983950adfc9d6dcf8ad/Untitled%201.png"/></a></figure><ul id="ed25a668-a114-4851-b7b2-dbf04c2a3d75" class="bulleted-list"><li style="list-style-type:disc">Next, upload a screenshot of your execution result and submit it through the Zuvio assignment.</li></ul><h3 id="fecfdc61-472f-4c28-8102-5aaef2c3191a" class="block-color-gray_background">Assignment 1: Online practice on the website <a href="http://snakify.org/">Snakify.org</a>: </h3><ul id="aef8fa6f-c20b-41e1-8289-5e1c10b8b946" class="bulleted-list"><li style="list-style-type:disc">Please log in to your Snakify account and solve the following problems. You must use your account to complete these online exercises in order to earn assignment points.</li></ul><ul id="b58e438d-19fa-4acd-8c41-2df6d5a4e7b0" class="bulleted-list"><li style="list-style-type:disc">You need to finish lessons 1 to 3 on Snakify.</li></ul><p id="256e9d9b-6dbf-4c6f-817f-5cb488b46442" class="">
+    main()</code></pre><ul id="eaecf359-b43a-45d2-ba05-f97c49c88ef6" class="bulleted-list"><li style="list-style-type:disc">After creating the Python script &quot;<a href="http://ex01.py/">ex01.py</a>&quot; in VSCode, change its permissions using the &quot;chmod +x&quot; command, and then run the script in a GitHub Codespace, which operates in a Linux environment.</li></ul><figure id="8d8bd103-f39b-4029-9e60-03f770a58e39" class="image"><a href="Python%20Fundamentals%20(1%206)%20debfa8bd9bb04983950adfc9d6dcf8ad/Untitled%201.png"><img style="width:950px" src="Python%20Fundamentals%20(1%206)%20debfa8bd9bb04983950adfc9d6dcf8ad/Untitled%201.png"/></a></figure><ul id="ed25a668-a114-4851-b7b2-dbf04c2a3d75" class="bulleted-list"><li style="list-style-type:disc">Next, upload a screenshot of your execution result and submit it through the Zuvio assignment.</li></ul><h3 id="fecfdc61-472f-4c28-8102-5aaef2c3191a" class="block-color-gray_background">Exercise 2: Utilizing GitHub Codespaces and an automated testing script for completing programming assignments.</h3><p id="7114a7fb-44ff-49b0-afb0-9abb678f4cf6" class="">To learn how to utilize Github Codespaces for testing your programming assignments, follow these steps:</p><ol type="1" id="68978318-1de6-4e51-a8af-b642367063a8" class="numbered-list" start="1"><li>Sign in to your GitHub account. If you don&#x27;t have one, please sign up using your school email.</li></ol><ol type="1" id="c403ef11-b22e-44c6-84aa-5dc4c50b53d8" class="numbered-list" start="2"><li>After logging into your GitHub account, create a new repository named &quot;rpi2023fall-hw.&quot; Ensure that the repository is set to private and select the option to create a default README file.</li></ol><ol type="1" id="b04af542-b77b-4d16-855f-e6666baf82f6" class="numbered-list" start="3"><li>Next, create a new Codespace and link it to the newly created repository.</li></ol><ol type="1" id="df47e07e-9d94-4b1f-a32e-c0fb6b870540" class="numbered-list" start="4"><li>Select the &quot;Open in browser&quot; option to access the newly created Codespace and set up your working environment using the following Linux commands.</li></ol><pre id="f223bb8c-aae6-43b2-a4dc-c0da079d54a1" class="code"><code># Create a .gitignore file to exclude the programming assignment repository.
+echo &quot;rpi2023fall-pub/&quot; &gt; .gitignore
+git add .gitignore
+git commit -m &quot;add .gitignore&quot;
+git push
+
+# Create a convenient shell script named \&#x27;pushall\&#x27; for synchronizing with the repository quickly.
+echo &quot;git pull&quot; &gt; pushall
+echo &quot;git add .&quot; &gt;&gt; pushall
+echo &quot;git commit -m codespace&quot; &gt;&gt; pushall
+echo &quot;git push&quot; &gt;&gt; pushall
+chmod +x pushall
+
+# Create a convenient shell script named \&#x27;update-hw\&#x27; for synchronizing with the repository quickly.
+echo &quot;cd ./rpi2023fall-pub&quot; &gt; update-hw
+echo &quot;git pull&quot; &gt;&gt; update-hw
+echo &quot;cd ..&quot; &gt;&gt; update-hw
+chmod +x update-hw
+
+# clone programming assignment repository.
+git clone https://github.com/jy3736/rpi2023fall-pub.git
+
+# Your codespace is prepared for productive work</code></pre><ul id="e15355e4-354a-46e5-aa0a-7c2d4f625392" class="bulleted-list"><li style="list-style-type:disc">Now your can copy the programming assignment folder from the folder “rpi2023fall-pub.”<pre id="7410d6c5-e9b1-4408-b225-a8f9c01937fa" class="code"><code>cp ./rpi2023fall-pub/week01
+cp ./rpi2023fall-pub/week02
+cp ./rpi2023fall-pub/week03</code></pre></li></ul><ul id="e2849a58-4ad9-49ba-b0d0-75581b70d456" class="bulleted-list"><li style="list-style-type:disc">Before you turn off Github, remember to synchronize your work to the repository via the “pushall” script or type the flowing commands on your own.<pre id="4d97ca03-6ee0-46df-bf1d-039c34300790" class="code"><code>git pull
+git add .
+git commit -m codespace
+git push
+</code></pre></li></ul><p id="12eb26db-45b1-4490-8bd2-994be5b08fab" class="">
+</p><h3 id="8c6372d7-fdae-4fcf-8e04-f2153ba69b0f" class="block-color-gray_background">Assignment 1: Online practice on the website <a href="http://snakify.org/">Snakify.org</a>: </h3><ul id="90c746d7-b674-4aae-b395-fd2aa3ebaa4a" class="bulleted-list"><li style="list-style-type:disc">Please log in to your Snakify account and solve the following problems. You must use your account to complete these online exercises in order to earn assignment points.</li></ul><ul id="ce7b8689-fe5d-4c67-95e6-8537552c26e7" class="bulleted-list"><li style="list-style-type:disc">You need to finish lessons 1 to 3 on Snakify.</li></ul><p id="a6f67bf7-8122-43ea-92a2-fc315dfef65d" class="block-color-gray_background">
 </p><p id="91fa8000-9a0b-40d1-aa5d-96e3806713a7" class="">
 </p><figure id="8c49e96e-8514-41e3-bbf9-6227bf73a7e6" class="image"><a href="Python%20Fundamentals%20(1%206)%20debfa8bd9bb04983950adfc9d6dcf8ad/14.png"><img style="width:1500px" src="Python%20Fundamentals%20(1%206)%20debfa8bd9bb04983950adfc9d6dcf8ad/14.png"/></a></figure></div></article>
 <script>hljs.highlightAll();</script>
