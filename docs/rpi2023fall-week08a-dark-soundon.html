@@ -1,0 +1,963 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Auto Grading Assessment - Snakify Lesson 5/7/8 (week07) </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="c8b7dd11-1b45-4f42-b2af-f28b16cfb98f" class="page sans"><header><img class="page-cover-image" src="Auto%20Grading%20Assessment%20-%20Snakify%20Lesson%205%207%208%20(we%20c8b7dd111b454f42b2aff28b16cfb98f/notion-Python_(1).png" style="object-position:center 31.08%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Auto%20Grading%20Assessment%20-%20Snakify%20Lesson%205%207%208%20(we%20c8b7dd111b454f42b2aff28b16cfb98f/yang01.png"/></div><h1 class="page-title">Auto Grading Assessment - Snakify Lesson 5/7/8 (week07) </h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h3 id="30eafb7b-8eb1-471c-8062-665952712aca" class="block-color-teal_background">1. <strong>Finding Adjacent Number Pair(s) with the Same Sign</strong></h3><p id="75bcd65a-2264-4c6f-a69d-665d8a0771c9" class="">In a provided list of numbers, your objective is to identify and print adjacent pairs of elements that have the same sign. If there are no such pairs, the output should be empty list. You have to implement the function <code>sign_pairs</code> that takes a string of numbers as input and returns a list of lists of pairs of adjacent numbers with the same sign.</p><p id="94e1fc34-cecb-4e01-b7c8-c6bd0d957ddf" class=""><em>Your task is to implement the following function:</em></p><pre id="39b5ed5c-7219-41a0-86d2-ba7c376904ed" class="code code-wrap"><code>#!/usr/bin/env python3
+
+def sign_pairs(numbers):
+		#----------------------
+		# write your code here
+		#----------------------
+
+#---------------------------------------------------------------------
+# you can modify the following to test your code more thoroughly
+#---------------------------------------------------------------------
+
+data = [
+    &quot;1 -2 3 4 -5 6 7 8 -9 10&quot;,
+    &quot;1 -2 3 -5 6 -7 8 -9 10&quot;,
+    &quot;1 2 3 4 5 6 7 8 9 10&quot;,
+    &quot;1 -2 3 -4 5 -6 7 -8 9 -10&quot;,
+    &quot;1 -2 3 -4 5 -6 7 -8 9 -10 11&quot;,
+    &quot;1 -2 3 -4 5 -6 7 -8 9 -10 11 -12&quot;,
+    &quot;-1 -2 -3 -4 -5 -6 -7 -8 -9 -10&quot;,
+ ]
+
+def main():
+    global data
+    for test_case in data:
+        result = sign_pairs(test_case)
+        print(result)
+
+if __name__ == &#x27;__main__&#x27;:
+    main()</code></pre><p id="86706d10-be98-4027-a6ce-a68316084ea9" class=""><em>Testing in the Command Prompt:</em></p><pre id="6d01bd5e-6c3b-4158-9cc0-78b4928e7f7f" class="code code-wrap"><code>[prob01]$ python main.py
+[[3, 4], [6, 7], [7, 8]]
+[]
+[[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 10]]
+[]
+[]
+[]
+[[-1, -2], [-2, -3], [-3, -4], [-4, -5], [-5, -6], [-6, -7], [-7, -8], [-8, -9], [-9, -10]]</code></pre><p id="9a861f3a-b872-4950-b4b4-eecbe0e3fcd9" class=""><em>Testing with testing script:</em></p><pre id="34c986e6-ef3f-463c-8565-fd797d5387a1" class="code code-wrap"><code>[prob01]$ python testing.py
+&quot;1 -2 3 4 -5 6 7 8 -9 10&quot;
+&quot;1 -2 3 -5 6 -7 8 -9 10&quot;
+&quot;1 2 3 4 5 6 7 8 9 10&quot;
+...
+... omitted for brevity
+...
+&quot;1 0 1 0 2 0 2 0 3 0 3 0 4 0 4 0 5 0 5 0 5 0 0 0 0&quot;
+&quot;1 1 1 2 2 2 3 3 3 4 4 4 5 5 5 6 6 6 7 7 7 8 8 8 9&quot;
+&quot;1 -1 1 2 -2 2 3 -3 3 4 -4 4 5 -5 5 6 -6 6 7 -7 7 8 -8 8&quot;
+&quot;0 1 0 1 0 2 0 2 0 3 0 3 0 4 0 4 0 5 0 5 0 5 0 0 0 0&quot;
+&quot;1 0 1 0 2 0 2 0 3 0 3 0 4 0 4 0 5 0 5 0 5 0 0 0 0 0&quot;
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK</code></pre><p id="243b1217-c433-4717-9161-05be8cdd8fef" class="">
+</p><h3 id="e72dbe25-e3e3-416b-b975-f89bcab1f04d" class="block-color-teal_background">2. <strong>Identifying Consecutive Number Pairs with Matching Signs, Avoiding Overlaps</strong></h3><p id="16f7dab4-cea7-4f80-90a7-e0114c5ebe1f" class="">To make the task clearer, your goal is to examine a list of numbers and identify adjacent pairs of elements that share the same sign. If no such pairs are found, the output should be an empty list. You should create a function called <code>sign_pairs</code> that accepts a string of numbers as input and produces a list of lists, each containing pairs of adjacent numbers with matching signs. Ensure that these pairs <code>do not overlap</code>.</p><p id="8246c6ea-5f20-456e-b733-ec8cc3d31f80" class=""><em>Your task is to implement the following function:</em></p><pre id="fd58e357-1bb1-4ea8-ad63-18383e832a98" class="code code-wrap"><code>#!/usr/bin/env python3
+
+def sign_pairs(numbers):
+		#----------------------
+		# write your code here
+		#----------------------
+	
+#---------------------------------------------------------------------
+# you can modify the following to test your code more thoroughly
+#---------------------------------------------------------------------
+
+data = [
+    &quot;1 -2 3 4 -5 6 7 8 -9 10&quot;,
+    &quot;1 -2 3 -5 6 -7 8 -9 10&quot;,
+    &quot;1 2 3 4 5 6 7 8 9 10&quot;,
+    &quot;1 -2 3 -4 5 -6 7 -8 9 -10&quot;,
+    &quot;1 -2 3 -4 5 -6 7 -8 9 -10 11&quot;,
+    &quot;1 -2 3 -4 5 -6 7 -8 9 -10 11 -12&quot;,
+    &quot;-1 -2 -3 -4 -5 -6 -7 -8 -9 -10&quot;,
+ ]
+
+def main():
+    global data
+    for test_case in data:
+        result = sign_pairs(test_case)
+        print(result)
+
+if __name__ == &#x27;__main__&#x27;:
+    main()</code></pre><p id="6a348eb7-058d-43af-b480-20fae4a1c20e" class=""><em>Testing in the Command Prompt:</em></p><pre id="4e3aadff-f5b9-4735-9708-367f41035885" class="code code-wrap"><code>[prob02]$ python main.py
+[[3, 4], [6, 7]]
+[]
+[[1, 2], [3, 4], [5, 6], [7, 8], [9, 10]]
+[]
+[]
+[]
+[[-1, -2], [-3, -4], [-5, -6], [-7, -8], [-9, -10]]</code></pre><p id="0397221b-42e0-4e88-ac82-9b9fe38bc792" class=""><em>Testing with testing script:</em></p><pre id="0ffd3558-8846-49b4-a5f4-c3b1dadcca92" class="code code-wrap"><code>[prob01]$ python testing.py
+[prob02]$ python testing.py
+&quot;1 -2 3 4 -5 6 7 8 -9 10&quot;
+&quot;1 -2 3 -5 6 -7 8 -9 10&quot;
+&quot;1 2 3 4 5 6 7 8 9 10&quot;
+&quot;1 -2 3 -4 5 -6 7 -8 9 -10&quot;
+...
+... omitted for brevity
+...
+&quot;0 1 0 1 0 2 0 2 0 3 0 3 0 4 0 4 0 5 0 5 0 5 0 0 0&quot;
+&quot;1 0 1 0 2 0 2 0 3 0 3 0 4 0 4 0 5 0 5 0 5 0 0 0 0&quot;
+&quot;1 1 1 2 2 2 3 3 3 4 4 4 5 5 5 6 6 6 7 7 7 8 8 8 9&quot;
+&quot;1 -1 1 2 -2 2 3 -3 3 4 -4 4 5 -5 5 6 -6 6 7 -7 7 8 -8 8&quot;
+&quot;0 1 0 1 0 2 0 2 0 3 0 3 0 4 0 4 0 5 0 5 0 5 0 0 0 0&quot;
+&quot;1 0 1 0 2 0 2 0 3 0 3 0 4 0 4 0 5 0 5 0 5 0 0 0 0 0&quot;
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK</code></pre><p id="e7bd0a4d-decb-4e89-b8fd-a000a1d6810b" class="">
+</p><h3 id="36974707-6145-46b3-a11f-f64c6e1a8c65" class="block-color-teal_background">3. <strong>Counting Unique Elements in Unordered Lists Without Using Sets</strong></h3><p id="96048475-8004-491f-9e42-15046e76c232" class="">In this Python programming task, your objective is to create a script that can determine the count of unique elements within an unsorted list. The catch is that you should achieve this without employing Python&#x27;s <code>set</code> data structure.</p><p id="c8a17c28-e947-4017-8443-f812ce24df9a" class="">To clarify further, the term <code>unordered list</code> refers to a list where the items are not arranged in any specific order, and there may be repetitions of elements. The aim is to find out how many distinct elements are present in the list and calculate the count of these unique elements.</p><p id="753d46f7-0793-4ff8-8d87-733527d37e55" class=""><em>Your task is to implement the following function:</em></p><pre id="c3d5c527-d9d1-4f09-a137-c555e8d988f8" class="code code-wrap"><code>#!/usr/bin/env python3
+
+def count_unique(numstr):
+		#----------------------
+		# wwrite your code here
+		#----------------------
+
+#---------------------------------------------------------------------
+# you can modify the following to test your code more thoroughly
+#---------------------------------------------------------------------
+
+data = [
+    &quot;1 2 3 4 5 6 7 8 9&quot;,
+    &quot;1 1 1 1 1 1 1 1&quot;,
+    &quot;1 2 1 2 1 2 1 2&quot;,
+    &quot;1 2 3 1 2 3 1 2 3&quot;,
+    &quot;1 1 1 1 2&quot;,
+    &quot;1 2 2 3 3 4&quot;,
+    &quot;1 2 3 4 5 1 2 3 4&quot;,
+    &quot;1 2 3 4 1 2 3 4 5&quot;,
+    &quot;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15&quot;
+]
+
+def main():
+    global data
+    for test_case in data:
+        result = count_unique(test_case)
+        print(result)
+
+if __name__ == &#x27;__main__&#x27;:
+    main()</code></pre><p id="a2d64a39-87d1-42e7-84a4-00fb39e0c008" class=""><em>Testing in the Command Prompt:</em></p><pre id="f3dad8e0-3e72-4c0b-81b7-90dfe997d8a3" class="code code-wrap"><code>[prob03]$ python main.py
+9
+1
+2
+3
+2
+4
+5
+5
+15</code></pre><p id="2b8643ce-123b-4c80-b321-837f6856971b" class=""><em>Testing with testing script:</em></p><pre id="1a9af3e5-8249-4eec-aad3-39bf454d21d6" class="code code-wrap"><code>[prob03]$ python testing.py
+&quot;1 2 3 4 5 6 7 8 9&quot;
+&quot;1 1 1 1 1 1 1 1&quot;
+&quot;1 2 1 2 1 2 1 2&quot;
+&quot;1 2 3 1 2 3 1 2 3&quot;
+&quot;1 1 1 1 2&quot;
+&quot;1 2 2 3 3 4&quot;
+&quot;1 1 1 2 2 2 3 3 3&quot;
+&quot;2 2 3 3 4 4 5 5 6&quot;
+...
+... omitted for brevity
+...
+&quot;2 2 2 2 2 2 2 2 2 2 2 2 2 2 2&quot;
+&quot;3 3 3 3 3 3 3 3 3 3 3 3 3 3 3&quot;
+&quot;4 4 4 4 4 4 4 4 4 4 4 4 4 4 4&quot;
+&quot;6 6 6 6 6 6 6 6 6 6 6 6 6 6 6&quot;
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK</code></pre><p id="fadd1c25-eb96-492a-a7c0-8b373eb0caa0" class="">
+</p><h3 id="f84afc1d-0346-422c-9cf1-ca1dddefdb3d" class="block-color-teal_background">4. <strong>Sorting Integers in a String</strong></h3><p id="6691dabc-1229-4b93-b876-2b7e03d9fbdc" class="">Develop a function named <code>mysort(dat)</code> to sort integers within the string <code>dat</code> without modifying the original string.</p><ul id="039db7b1-85ac-4041-bef6-c608a9b4eda3" class="bulleted-list"><li style="list-style-type:disc"><code>dat</code>: The string comprises integers arranged in a random order.</li></ul><p id="f43efdd1-3eaa-41b6-bce7-17a9391cd9dd" class=""><em>Your task is to implement the following function:</em></p><pre id="e977b63f-71bb-4521-8bc2-9408c8f642f9" class="code code-wrap"><code>#!/usr/bin/env python3
+
+def mysort(dat):
+    pass
+		# write your code here
+
+#---------------------------------------------------------------------
+# you can modify the following to test your code more thoroughly
+#---------------------------------------------------------------------
+
+data = [&#x27;18 64 54 4 36 55 28 10 82 94 59 78 88 18 37 39 75&#x27;,
+        &#x27;34 21 83 94 20 95 7 73 95 17 100 16 56 46 33 66 31 31 100 63&#x27;,
+        &#x27;43 41 97 76 15 42 18 67 9 30 44 13 5 10 4 90 53 19 44 17 36 35&#x27;,
+        &#x27;77 8 54 32 37 7 60 0&#x27;,
+        &#x27;7 13 70 60 12 32 71 38 68 18 37 98 38 44 31 87 44 13 89&#x27;,
+        &#x27;51 78 49 51 35 99 54 83 43 100 58 25 61 85 43 33 11 12 18 8 100 12 44 84&#x27;,
+        &#x27;53 50 44 73 18 56 16 21 29 62 15 78 10 82 55 7 6 19 10 21 15&#x27;,
+        &#x27;53 33 49 91 32 22 84 45 31 79 22 44 93 19&#x27;,
+        &#x27;32 44 9 37 81 5 95 24 49 55 46 18 13 15 31 65 78 39 38 42 1 54 68 80 94&#x27;,
+        &#x27;100 44 40 92 29 99 17 2 27 96 23 26 48 65 77 23 17 17 83&#x27;
+        ]
+
+def main():
+    global data
+    for test_case in data:
+        result = mysort(test_case);
+        print(result)
+
+if __name__ == &#x27;__main__&#x27;:
+    main()</code></pre><p id="d8f92972-03fc-42f8-9360-2a75db43f21a" class=""><em>Testing in the Command Prompt:</em></p><pre id="c79fe825-b861-43f4-9378-8666b95c5739" class="code code-wrap"><code>[prob04]$ python main.py
+4 10 18 18 28 36 37 39 54 55 59 64 75 78 82 88 94
+7 16 17 20 21 31 31 33 34 46 56 63 66 73 83 94 95 95 100 100
+4 5 9 10 13 15 17 18 19 30 35 36 41 42 43 44 44 53 67 76 90 97
+0 7 8 32 37 54 60 77
+7 12 13 13 18 31 32 37 38 38 44 44 60 68 70 71 87 89 98
+8 11 12 12 18 25 33 35 43 43 44 49 51 51 54 58 61 78 83 84 85 99 100 100
+6 7 10 10 15 15 16 18 19 21 21 29 44 50 53 55 56 62 73 78 82
+19 22 22 31 32 33 44 45 49 53 79 84 91 93
+1 5 9 13 15 18 24 31 32 37 38 39 42 44 46 49 54 55 65 68 78 80 81 94 95
+2 17 17 17 23 23 26 27 29 40 44 48 65 77 83 92 96 99 100</code></pre><p id="54c30720-a2cc-420f-8c65-d9818d964677" class=""><em>Testing with testing script:</em></p><pre id="89441f32-356b-4b08-871c-e61bbd0b07e4" class="code code-wrap"><code>[prob04]$ python testing.py
+&quot;49 94 32 19 96 73 68 68 90 52 24 31 38&quot;
+&quot;47 16 65 61 34 69 52 17&quot;
+&quot;43 65 78 37 3 31 21 93 88&quot;
+&quot;90 6 76 91 45 5 27 57 49 49 91 91 78&quot;
+&quot;50 98 84 61 19 60 36 65&quot;
+&quot;47 80 36 59 68 27 91 8 61 99 15 79 87 63 83 12 59 75 22 74 62 34 5&quot;
+...
+... omitted for brevity
+...
+&quot;68 24 91 18 50 1 48&quot;
+&quot;7 26 27 2 29 86 1&quot;
+&quot;73 94 81 33 46 52 71 20&quot;
+&quot;9 21 18 49 17 94 95 61&quot;
+&quot;22 82 36 95 95 39 100 93 40 73 83 48 83 39 28 43 8 22 87&quot;
+&quot;1 83 20 28 73 56 70 99 38 52 83 10 7 61 55 62 12 64 13 22 39&quot;
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.003s
+
+OK</code></pre><p id="794e29d7-734a-4989-bb36-69cd5503bb50" class="">
+</p><h3 id="aa29679d-5642-4881-8e8a-8ed31cc24e8c" class="block-color-teal_background">5. <strong>Sorting a Specific Range of Integers in a String</strong></h3><p id="df9156cb-c086-4c36-94e2-aea677ca63ee" class="">Create a function named mysort(dat, start, end) to sort a specific range of integers within a string without altering the original string. The input parameters for this function are:</p><ul id="e879651c-8bb6-4040-84a1-f17b99a3ebb8" class="bulleted-list"><li style="list-style-type:disc"><code>dat</code>: The string contains integers arranged in a random order.</li></ul><ul id="1ee5f2ea-de38-4d04-b95b-0c1c22b4bc03" class="bulleted-list"><li style="list-style-type:disc"><code>start</code>: The index at which you want to begin sorting (inclusive).</li></ul><ul id="7bd11cef-d441-40a0-bf20-c7cfe88db1f8" class="bulleted-list"><li style="list-style-type:disc"><code>end</code>: The index at which you want to stop sorting (exclusive).</li></ul><p id="f5e6503d-82d6-42f1-a7fd-47b653072646" class="">The function&#x27;s objective is to sort the integers within the dat string, including those starting from the start index up to, but not including, the integer at the end index. It should return a new string containing the sorted integers from the specified range, while preserving the original string&#x27;s content.</p><p id="d78c0438-6668-47fc-b0ea-086de788467c" class="">The function should return the original string in the following cases:</p><ul id="5812c33b-1fd8-4c21-9faa-fa58aa6705ff" class="bulleted-list"><li style="list-style-type:disc">When <code>start</code> is greater than or equal to <code>end</code>.</li></ul><ul id="6a1e5b88-3640-43b4-933e-38a1b634201e" class="bulleted-list"><li style="list-style-type:disc">When <code>start</code> is less than 0.</li></ul><ul id="7763d3b8-2915-404e-9ab5-7229047656e2" class="bulleted-list"><li style="list-style-type:disc">When <code>end</code> is greater than the length of the string.</li></ul><p id="e68e37d9-8ee1-4830-96cd-a3dcf03e3be6" class=""><em>Your task is to implement the following function:</em></p><pre id="7be122c0-4567-4c99-89c5-715424a02dab" class="code code-wrap"><code>#!/usr/bin/env python3
+
+def mysort(dat, start, end):
+    pass
+		# write your code here
+
+#---------------------------------------------------------------------
+# you can modify the following to test your code more thoroughly
+#---------------------------------------------------------------------
+
+data = [&#x27;18 64 54 4 36 55 28 10 82 94 59 78 88 18 37 39 75&#x27;,
+        &#x27;34 21 83 94 20 95 7 73 95 17 100 16 56 46 33 66 31 31 100 63&#x27;,
+        &#x27;43 41 97 76 15 42 18 67 9 30 44 13 5 10 4 90 53 19 44 17 36 35&#x27;,
+        &#x27;77 8 54 32 37 7 60 0&#x27;,
+        &#x27;7 13 70 60 12 32 71 38 68 18 37 98 38 44 31 87 44 13 89&#x27;,
+        &#x27;51 78 49 51 35 99 54 83 43 100 58 25 61 85 43 33 11 12 18 8 100 12 44 84&#x27;,
+        &#x27;53 50 44 73 18 56 16 21 29 62 15 78 10 82 55 7 6 19 10 21 15&#x27;,
+        &#x27;53 33 49 91 32 22 84 45 31 79 22 44 93 19&#x27;,
+        &#x27;32 44 9 37 81 5 95 24 49 55 46 18 13 15 31 65 78 39 38 42 1 54 68 80 94&#x27;,
+        &#x27;100 44 40 92 29 99 17 2 27 96 23 26 48 65 77 23 17 17 83&#x27;
+        ]
+
+def main():
+    global data
+    for test_case in data:
+        result = mysort(test_case,5,15);
+        print(result)
+
+if __name__ == &#x27;__main__&#x27;:
+    main()</code></pre><p id="bb1d66ce-4399-45ba-bf7a-e55ecd36e21d" class=""><em>Testing in the Command Prompt:</em></p><pre id="b510eba3-258d-4c79-b0c6-619eb94df44f" class="code code-wrap"><code>[prob05]$ python main.py
+18 64 54 4 36 10 18 28 37 55 59 78 82 88 94 39 75
+34 21 83 94 20 7 16 17 33 46 56 73 95 95 100 66 31 31 100 63
+43 41 97 76 15 4 5 9 10 13 18 30 42 44 67 90 53 19 44 17 36 35
+77 8 54 32 37 7 60 0
+7 13 70 60 12 18 31 32 37 38 38 44 68 71 98 87 44 13 89
+51 78 49 51 35 25 43 43 54 58 61 83 85 99 100 33 11 12 18 8 100 12 44 84
+53 50 44 73 18 10 15 16 21 29 55 56 62 78 82 7 6 19 10 21 15
+53 33 49 91 32 22 84 45 31 79 22 44 93 19
+32 44 9 37 81 5 13 15 18 24 31 46 49 55 95 65 78 39 38 42 1 54 68 80 94
+100 44 40 92 29 2 17 23 26 27 48 65 77 96 99 23 17 17 83</code></pre><p id="8dd0197b-4815-49f6-9cc7-f800e5bbdc29" class=""><em>Testing with testing script:</em></p><pre id="c8e5e0aa-dae2-4ae6-88ec-1140d55e10c3" class="code code-wrap"><code>[prob05]$ python testing.pyc
+&quot;31 39 42 74 96 37 3 79 38 85 20 68 56 63 21 80 69&quot; 1 21
+&quot;42 59 34 87 29 12 59 41 43 54 23 76 71 82 7 28 57 98 5 81&quot; 0 11
+&quot;64 63 63 38 95 93 53 36 28 75 23 45 16 45 37 14 45 67 11 31 47 25 4 84&quot; 0 24
+&quot;35 7 22 16 40 58&quot; 7 25
+...
+... omitted for brevity
+...
+&quot;36 5 83 39 24 25 99 67 77&quot; 8 8
+&quot;84 93 34 36 49 88 89 59 58 98 13 24 27&quot; 0 17
+&quot;53 17 32 95 45 55 98 80 68 13&quot; 10 5
+&quot;91 42 12 4 63 54 93 62 60 54 1 19 97 21 2 32 97 72 74 28 5 84 73 16&quot; 0 29
+&quot;11 46 11 83 52 64 87 17 35&quot; 10 6
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.003s
+
+OK</code></pre><p id="0b845710-29dc-4604-8c29-4f876aec6dec" class="">
+</p><figure id="15a518f8-f149-472d-9c1d-50d28fd33578" class="image"><a href="Auto%20Grading%20Assessment%20-%20Snakify%20Lesson%205%207%208%20(we%20c8b7dd111b454f42b2aff28b16cfb98f/16.png"><img style="width:1500px" src="Auto%20Grading%20Assessment%20-%20Snakify%20Lesson%205%207%208%20(we%20c8b7dd111b454f42b2aff28b16cfb98f/16.png"/></a></figure><p id="1162a238-bccc-4238-904f-22f4168148d9" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span>
+<script>hljs.highlightAll();</script>
+</body></html>
