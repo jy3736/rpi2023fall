@@ -1,0 +1,751 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MQTT Fundamentals with Python Examples</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="40f6b245-f47c-4440-a0b2-398e300fc80a" class="page sans"><header><img class="page-cover-image" src="MQTT%20Fundamentals%20with%20Python%20Examples%2040f6b245f47c4440a0b2398e300fc80a/microprocessor.png" style="object-position:center 35.34%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="MQTT%20Fundamentals%20with%20Python%20Examples%2040f6b245f47c4440a0b2398e300fc80a/yang01.png"/></div><h1 class="page-title">MQTT Fundamentals with Python Examples</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="77e6ba8d-cf56-4bd3-b737-85c07fd7c9e8" class="block-color-gray_background">Introduction to MQTT</h2><p id="cd6ca42a-8027-4711-a326-604be7ac7ee6" class="">MQTT, or Message Queuing Telemetry Transport, is a lightweight and efficient messaging protocol designed for low-bandwidth, high-latency, or unreliable networks. It follows a publish-subscribe model, making it ideal for the Internet of Things (IoT) and other scenarios where devices need to communicate.</p><h3 id="c7d5d7b9-76b6-4efd-8e04-6377769f9f9b" class="">Key Concepts</h3><ol type="1" id="ac117330-f6fb-459e-ae30-ce0a444edf46" class="numbered-list" start="1"><li><strong>Broker:</strong> MQTT communication is facilitated through a broker. The broker manages the messages between clients.</li></ol><ol type="1" id="f9029b2c-50ba-472d-a1b5-67f88a2f6754" class="numbered-list" start="2"><li><strong>Client:</strong> Devices that communicate using MQTT are clients. Clients can be either publishers, subscribers, or both.</li></ol><ol type="1" id="964bcdc4-5d61-42fa-8f9d-336d954a72f2" class="numbered-list" start="3"><li><strong>Topic:</strong> Messages are categorized into topics. Clients can subscribe to topics of interest or publish messages to specific topics.</li></ol><h2 id="365f7ea8-7ed7-4907-bc1c-c90e25e28586" class="block-color-gray_background">Basic MQTT Workflow</h2><ol type="1" id="081f89c1-9658-4109-bb38-0f6df6dc4c3b" class="numbered-list" start="1"><li><strong>Connection:</strong> Clients connect to the MQTT broker using a unique client ID.</li></ol><ol type="1" id="1126efc0-f996-4755-88ad-4d20bce42b09" class="numbered-list" start="2"><li><strong>Publishing:</strong> A client publishes a message to a specific topic on the broker.<pre id="49b02b04-391e-410a-90ac-2e4bf4831a75" class="code code-wrap"><code># Python MQTT Publishing Example
+import paho.mqtt.client as mqtt
+
+broker = &quot;broker.hivemq.com&quot;
+
+client = mqtt.Client()
+client.connect(broker, 1883, 60)
+client.publish(&quot;rpi2023fall/msg&quot;, &quot;Hello, MQTT!&quot;)</code></pre></li></ol><ol type="1" id="95d77619-fd98-4419-bb8c-f48958db56d2" class="numbered-list" start="3"><li><strong>Subscribing:</strong> Another client subscribes to a topic and receives messages published to that topic.<pre id="adf5c61d-7ef3-4ecd-94bd-a37da399e586" class="code code-wrap"><code># Python MQTT Subscribing Example
+import paho.mqtt.client as mqtt
+
+broker = &quot;broker.hivemq.com&quot;
+
+def on_message(client, userdata, msg):
+    msg = msg.payload.decode()
+    if msg == &quot;123456&quot;:
+        print(f&quot;Received message: {msg}. Exiting...&quot;)
+        exit(0)
+    else:
+        print(f&quot;Received message: {msg}&quot;)
+
+client = mqtt.Client()
+client.on_message = on_message
+client.connect(broker, 1883, 60)
+client.subscribe(&quot;rpi2023fall/msg&quot;)
+client.loop_forever()</code></pre></li></ol><ol type="1" id="a218f16a-4c0e-4c6d-86d9-f98304b7f057" class="numbered-list" start="4"><li>This example includes connection and message handling functions, providing a more robust foundation for building MQTT applications in Python.<pre id="0b672dc3-976c-467f-a9e2-7aa3fb5f47e3" class="code code-wrap"><code># Python MQTT Example with Paho-MQTT Library
+import paho.mqtt.client as mqtt
+
+broker = &quot;broker.hivemq.com&quot;
+
+def on_connect(client, userdata, flags, rc):
+    print(f&quot;Connected with result code {rc}&quot;)
+    client.subscribe(&quot;rpi2023fall/msg&quot;)
+
+def on_message(client, userdata, msg):
+    msg = msg.payload.decode()
+    if msg == &quot;123456&quot;:
+        print(f&quot;Received message: {msg}. Exiting...&quot;)
+        exit(0)
+    else:
+        print(f&quot;Received message: {msg}&quot;)
+
+client = mqtt.Client()
+client.on_connect = on_connect
+client.on_message = on_message
+
+client.connect(broker, 1883, 60)
+client.loop_forever()</code></pre></li></ol><h2 id="6cd0c1b9-a454-48b2-ab92-f53a7e2ec621" class="block-color-gray_background">Quality of Service (QoS)</h2><p id="f4a580d9-ce3f-4bc9-9094-110cc46976a6" class="">QoS in MQTT determines the level of guarantee for message delivery between the sender (publisher) and the receiver (subscriber). There are three levels of QoS:</p><ol type="1" id="6e347897-ea22-4d45-abf9-ca14224b8328" class="numbered-list" start="1"><li><strong>QoS 0 (At most once):</strong> This is the lowest level of assurance. The message is delivered at most once, and there is no acknowledgment from the receiver. This level is suitable for scenarios where occasional message loss is acceptable.</li></ol><ol type="1" id="29ffa3ac-35bc-46d5-8dd6-e1721bc7c316" class="numbered-list" start="2"><li><strong>QoS 1 (At least once):</strong> In this level, the sender ensures that the message is delivered at least once by retransmitting until it receives an acknowledgment from the receiver. However, duplicate messages might be delivered in case of network issues or failures.</li></ol><ol type="1" id="7c06b60d-df40-4a6e-9659-b46db8f4cbe0" class="numbered-list" start="3"><li><strong>QoS 2 (Exactly once):</strong> This is the highest level of assurance. The sender and receiver engage in a four-step handshake to ensure the message is delivered exactly once. This level is ideal for scenarios where message duplication is unacceptable.</li></ol><h3 id="2651ff58-7897-4669-b3a4-3b04d1eee868" class="">QoS 0 Example</h3><pre id="947733d6-f65f-480d-94aa-773eea9383cf" class="code code-wrap"><code># QoS 0 (At most once) Publishing Example
+import paho.mqtt.client as mqtt
+
+broker = &quot;broker.hivemq.com&quot;
+
+client = mqtt.Client()
+client.connect(broker, 1883, 60)
+message = &quot;QoS 0 - At most once&quot;
+client.publish(&quot;rpi2023fall/msg&quot;, message, qos=0)</code></pre><p id="0fe37a4f-1863-433b-9ddb-4ea883ebe52c" class="">In this example, the message is published with QoS 0, meaning it will be delivered at most once with no acknowledgment.</p><h3 id="7c660daa-58fd-4121-9b5d-1dfb06fecb11" class="">QoS Subscribing Example</h3><pre id="47fb9ffa-125b-4bf1-a252-ee963060e013" class="code code-wrap"><code># Subscribing Example
+import paho.mqtt.client as mqtt
+
+broker = &quot;broker.hivemq.com&quot;
+
+def on_message(client, userdata, msg):
+    print(f&quot;Received message: {msg.payload.decode()}&quot;)
+
+client = mqtt.Client()
+client.on_message = on_message
+client.connect(broker, 1883, 60)
+
+# Subscribe to the topic with the desired QoS level
+client.subscribe(&quot;rpi2023fall/msg&quot;, qos=2)
+
+client.loop_forever()
+</code></pre><p id="c0d25ce1-c446-4551-8b44-fd8cb36e5366" class="">In this example, a subscriber subscribes to the &quot;&quot;rpi2023fall/msg&quot; with QoS 2, ensuring that it receives messages with exactly-once delivery.</p><h2 id="0c7aa94c-ec4f-425a-a4d4-904c81d0132d" class="block-color-gray_background">Security Considerations</h2><ol type="1" id="08aef0a1-e98b-4826-8029-9dbbdf7acbd3" class="numbered-list" start="1"><li><strong>Authentication:</strong> MQTT can use username/password authentication to secure connections.</li></ol><ol type="1" id="9b17f97e-85a1-42bc-9ee7-b0d9b957f309" class="numbered-list" start="2"><li><strong>Encryption:</strong> TLS/SSL can be implemented for secure communication.</li></ol><h2 id="6fbfac5b-fb79-4265-ac09-80fe65a47218" class="block-color-gray_background"><strong>Python MQTT Libraries</strong></h2><p id="acecf1bb-35b8-46b8-92d4-ec8ca99398c8" class="">There are several Python libraries for MQTT. One commonly used library is the <code><strong>paho-mqtt</strong></code> library. Let&#x27;s look at a more detailed example:</p><pre id="9054c113-04f1-45f2-9a75-2d35f354f44d" class="code code-wrap"><code>pip install paho-mqtt</code></pre><p id="126151d0-5396-4855-b9ee-6dbe751e3f61" class="">
+</p><p id="e82ef25a-9c88-4b26-92ad-b7e291754b2a" class="">MQTT is a powerful protocol for efficient and lightweight communication, especially in IoT scenarios. With Python, integrating MQTT into your projects becomes straightforward, allowing seamless communication between devices.</p><p id="fb452643-0169-4611-8da9-6096ed34a597" class="">
+</p><p id="791ee53e-5acc-4c2d-8f43-516b29639a72" class="">
+</p><figure id="4a4d0763-af90-40d9-8783-ce3e003579d8" class="image"><a href="MQTT%20Fundamentals%20with%20Python%20Examples%2040f6b245f47c4440a0b2398e300fc80a/19.png"><img style="width:1500px" src="MQTT%20Fundamentals%20with%20Python%20Examples%2040f6b245f47c4440a0b2398e300fc80a/19.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span>
+<script>hljs.highlightAll();</script>
+</body></html>
